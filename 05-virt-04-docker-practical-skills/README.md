@@ -35,7 +35,7 @@ ENTRYPOINT ["/usr/bin/ponysay"]
 CMD ["Hey, netology"]
 
 ```  
-![Screenshot](22.12.2021_13.47.42_REC.png)  
+![Screenshot](ponysay.png)  
 
 https://hub.docker.com/r/mikhail762/virt541
 
@@ -66,7 +66,44 @@ https://hub.docker.com/r/mikhail762/virt541
 - Скриншоты веб-интерфейса Jenkins запущенных вами контейнеров (достаточно 1 скриншота на контейнер)
 - Ссылки на образы в вашем хранилище docker-hub
 
-https://hub.docker.com/r/mikhail762/virt5421
+Первый образ:  
+```
+FROM amazoncorretto
+
+RUN yum install wget -y && \
+wget -O /etc/yum.repos.d/jenkins.repo \
+https://pkg.jenkins.io/redhat-stable/jenkins.repo && \
+rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key && \
+yum upgrade -y && \
+amazon-linux-extras install epel -y && \
+yum update -y && \
+yum install jenkins -y
+
+EXPOSE 8080
+CMD ["/usr/bin/java","-jar","/usr/lib/jenkins/jenkins.war"]
+```
+![amazon_cli](amazon_cli.png)  
+![amazon_web](amazon_web.png)
+https://hub.docker.com/r/mikhail762/virt5421  
+
+Второй образ:  
+```
+FROM ubuntu:latest
+
+RUN apt update -y && \
+apt install gnupg2 wget -y && \
+wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | apt-key add - && \
+sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > \
+/etc/apt/sources.list.d/jenkins.list' && \
+apt update -y && \
+apt install openjdk-11-jdk -y && \
+apt-get install jenkins -y
+
+EXPOSE 8080
+CMD ["/usr/bin/java","-jar","/usr/share/jenkins/jenkins.war"]
+```
+![ubuntu_cli](ubuntu_cli.png)  
+![ubuntu_web](ubuntu_web.png)
 https://hub.docker.com/r/mikhail762/virt5422
 
 
@@ -92,6 +129,24 @@ https://hub.docker.com/r/mikhail762/virt5422
 - Наполнение Dockerfile с npm приложением
 - Скриншот вывода вызова команды списка docker сетей (docker network cli)
 - Скриншот вызова утилиты curl с успешным ответом
+
+```commandline
+FROM node
+
+WORKDIR /home/nodejs-demo
+RUN git clone https://github.com/simplicitesoftware/nodejs-demo.git .
+RUN npm install
+
+EXPOSE 3000
+
+CMD ["npm", "start", "0.0.0.0"]
+```  
+![containers](containers.png)
+![network](network.png)
+![curl](curl.png)
+
+
+
 
 ---
 
