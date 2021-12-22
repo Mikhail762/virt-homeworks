@@ -102,7 +102,7 @@ apt-get install jenkins -y
 EXPOSE 8080
 CMD ["/usr/bin/java","-jar","/usr/share/jenkins/jenkins.war"]
 ```
-![ubuntu_cli](ubuntu_cli.png)  
+![ubuntu_cli](Ubuntu_cli.png)  
 ![ubuntu_web](ubuntu_web.png)
 https://hub.docker.com/r/mikhail762/virt5422
 
