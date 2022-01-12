@@ -77,7 +77,7 @@ secret_key     ****************Uq8Y              env
 >1. Ответ на вопрос: при помощи какого инструмента (из разобранных на прошлом занятии) можно создать свой образ ami?
 Packer + amazon plugin
 
->1. Ссылку на репозиторий с исходной конфигурацией терраформа. 
- AWS - https://github.com/Mikhail762/virt-homeworks/tree/master/07-terraform-02-syntax/terraform
+>1. Ссылку на репозиторий с исходной конфигурацией терраформа.  
+>AWS - https://github.com/Mikhail762/virt-homeworks/tree/master/07-terraform-02-syntax/terraform  
  YC - https://github.com/Mikhail762/virt-homeworks/blob/master/07-terraform-02-syntax/main.tf
 
