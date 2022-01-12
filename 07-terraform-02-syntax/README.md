@@ -78,6 +78,6 @@ secret_key     ****************Uq8Y              env
 Packer + amazon plugin
 
 >1. Ссылку на репозиторий с исходной конфигурацией терраформа. 
-> 
- 
+ AWS - https://github.com/Mikhail762/virt-homeworks/tree/master/07-terraform-02-syntax/terraform
+ YC - https://github.com/Mikhail762/virt-homeworks/blob/master/07-terraform-02-syntax/main.tf
 
