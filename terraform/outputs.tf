@@ -11,7 +11,7 @@ output "current_region" {
 }
 
 output "private_ip" {
-  value = resource.aws_instance.test2.private_ip
+  value = resource.aws_instance.test2[*].private_ip
 }
 
 output "network_id" {
