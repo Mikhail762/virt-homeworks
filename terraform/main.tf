@@ -15,17 +15,44 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"]
 }
 
+locals {
+      instance_type_map = {
+          stage = "t3.micro"
+          prod = "t3.small"
+      }
+      instance_count_map = {
+        stage = 1
+        prod = 2
+      }
+      instances = {
+          "t3.micro" = data.aws_ami.ubuntu.id
+          "t3.small" = data.aws_ami.ubuntu.id
+      }
+    }
+
 resource "aws_instance" "test2" {
   ami           = data.aws_ami.ubuntu.id
-  instance_type = "t3.micro"
+  instance_type = local.instance_type_map[terraform.workspace]
   network_interface {
     network_interface_id = aws_network_interface.test_if.id
     device_index         = 0
   }
+  count = local.instance_count_map[terraform.workspace]
   tags = {
     Name = "HelloWorld"
   }
 }
+
+resource "aws_instance" "web" {
+    for_each = local.instances
+
+    ami           = each.value
+    instance_type = each.key
+
+    lifecycle {
+    create_before_destroy = true
+    }
+  }
 
 resource "aws_vpc" "my_vpc" {
   cidr_block = "172.16.0.0/16"
@@ -65,3 +92,4 @@ terraform {
     dynamodb_table="terraform-state-locks"
   }
 }
+
